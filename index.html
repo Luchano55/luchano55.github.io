@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1430">
+<link rel="icon" href="img/crab.png">
+<title>Роман Лучко</title>
+<meta name="description" content="Роман Лучко — предприниматель. ИИ-решения на Битрикс24, семейный проект «Три кода», свои продукты на GitHub.">
+<meta property="og:title" content="Роман Лучко">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://luchano55.github.io/">
+<meta property="og:image" content="https://luchano55.github.io/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="Предприниматель. Делаю ИИ-решения на Битрикс24 и довожу их до работающего результата.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: бортовой журнал космической эпохи — ночное небо, иллюминатор с портретом, снимки экипажа на пробковой доске, миссии как карточки полётных заданий */
+:root{
+  --space:#0B1430;      /* ночное небо с портрета */
+  --space-2:#121F45;    /* панель приборов */
+  --hull:#1C2B5C;       /* обшивка, линии */
+  --ivory:#EFE6D2;      /* бумага полётного листа */
+  --ink:#DCE3F5;        /* основной текст */
+  --muted:#8E9BC4;      /* подписи */
+  --signal:#FF6B35;     /* закатная полоса над морем */
+  --mustard:#F2B630;    /* курточка Норы */
+  --mint:#7FE0C8;       /* индикатор «в работе» */
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Golos Text","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--space);color:var(--ink);
+  font-family:var(--f-body);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:2;max-width:1120px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--mustard);outline-offset:3px;border-radius:4px}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- шапка ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:22px}
+.callsign{display:flex;align-items:center;gap:10px;text-decoration:none}
+.callsign b{font-family:var(--f-display);font-weight:900;font-size:15px;color:var(--ivory);
+  border:1.5px solid var(--ivory);border-radius:50%;width:38px;height:38px;display:grid;place-items:center}
+.top nav{display:flex;gap:20px}
+.top nav a{text-decoration:none}
+.top nav a:hover{color:var(--ivory)}
+@media(max-width:620px){.top nav{display:none}}
+
+/* ---------- первый экран ---------- */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-block:28px 56px}
+.hero>*{min-width:0}
+.eyebrow{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:22px}
+.eyebrow span::before{content:"●";color:var(--mint);margin-right:8px;font-size:9px;vertical-align:2px}
+h1{font-family:var(--f-display);font-weight:900;color:var(--ivory);
+  font-size:clamp(46px,8.4vw,104px);line-height:.92;letter-spacing:-.035em;margin:0;text-wrap:balance}
+h1 em{font-style:normal;display:block;
+  background:linear-gradient(180deg,var(--mustard) 0 48%,var(--signal) 48% 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(18px,2.1vw,21px);max-width:31ch;margin:26px 0 30px;color:var(--ink)}
+.lead b{color:var(--ivory);font-weight:600}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font-family:var(--f-display);font-weight:600;font-size:14px;letter-spacing:.02em;text-decoration:none;
+  padding:15px 24px;border-radius:999px;border:1.5px solid var(--ivory);color:var(--ivory);transition:transform .2s,background .2s,color .2s}
+.btn.primary{background:var(--signal);border-color:var(--signal);color:var(--space)}
+.btn:hover{transform:translateY(-2px)}
+.btn:not(.primary):hover{background:var(--ivory);color:var(--space)}
+
+/* иллюминатор */
+.porthole-box{position:relative;aspect-ratio:1;max-width:100%;width:min(440px,100%);justify-self:center}
+.orbit{position:absolute;inset:-7%;border:1px dashed var(--hull);border-radius:50%}
+.orbit.o2{inset:-17%;border-style:solid;border-color:rgba(142,155,196,.18)}
+.sat{position:absolute;inset:-7%;animation:spin 26s linear infinite}
+.sat i{position:absolute;top:50%;left:-7px;width:14px;height:14px;border-radius:50%;background:var(--mustard);box-shadow:0 0 18px var(--mustard)}
+.sat.s2{inset:-17%;animation-duration:48s;animation-direction:reverse}
+.sat.s2 i{left:auto;right:-5px;top:30%;width:10px;height:10px;background:var(--signal);box-shadow:0 0 14px var(--signal)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.porthole{position:absolute;inset:0;border-radius:50%;overflow:hidden;
+  box-shadow:0 0 0 10px var(--space-2),0 0 0 12px var(--hull),0 0 0 22px var(--space-2),0 30px 80px rgba(0,0,0,.55)}
+.porthole img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block}
+.porthole::after{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.18),transparent 34%),
+  repeating-linear-gradient(0deg,rgba(11,20,48,.12) 0 2px,transparent 2px 4px)}
+.bolts{position:absolute;inset:-14px;pointer-events:none}
+.bolts i{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--hull);
+  left:calc(50% + 50% * cos(var(--a)) - 3.5px);top:calc(50% + 50% * sin(var(--a)) - 3.5px)}
+.tag{position:absolute;z-index:5;right:-4%;bottom:6%;background:var(--ivory);color:var(--space);
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  padding:8px 12px;transform:rotate(-6deg);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.tag b{display:block;font-family:var(--f-display);font-size:15px;letter-spacing:0;text-transform:none}
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;gap:56px;padding-block:8px 48px}
+  .porthole-box{grid-row:1;width:min(300px,78vw)}
+}
+
+/* ---------- телеметрия ---------- */
+.telemetry{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--hull);margin-bottom:96px}
+.telemetry div{padding:22px 20px;border-left:1px solid var(--hull);min-width:0}
+.telemetry div:first-child{border-left:0;padding-left:0}
+.telemetry strong{display:block;font-family:var(--f-display);font-weight:800;font-size:clamp(21px,3vw,34px);color:var(--ivory);line-height:1.1;font-variant-numeric:tabular-nums}
+.telemetry small{display:block;font-size:14px;color:var(--muted);margin-top:6px;line-height:1.4}
+@media(max-width:760px){
+  .telemetry{grid-template-columns:1fr 1fr}
+  .telemetry div:nth-child(3){border-left:0;padding-left:0}
+  .telemetry div:nth-child(n+3){border-top:1px solid var(--hull)}
+}
+
+/* ---------- заголовки разделов ---------- */
+section{margin-bottom:110px;scroll-margin-top:20px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 24px;margin-bottom:40px}
+h2{font-family:var(--f-display);font-weight:800;color:var(--ivory);font-size:clamp(30px,4.6vw,52px);line-height:1;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2 span{color:var(--signal)}
+
+/* ---------- экипаж (коллаж) ---------- */
+.crew{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;align-items:start}
+.snap{position:relative;margin:0;background:var(--ivory);padding:10px 10px 0;color:var(--space);
+  box-shadow:0 20px 50px rgba(0,0,0,.5);transition:transform .35s ease}
+.snap img{display:block;width:100%;object-fit:cover}
+.snap figcaption{padding:12px 4px 14px;display:flex;justify-content:space-between;gap:10px;align-items:flex-end}
+.snap figcaption b{font-family:var(--f-display);font-weight:800;font-size:17px;line-height:1.15}
+.snap figcaption span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5A6488;text-align:right;white-space:nowrap}
+.snap p{margin:0;padding:0 4px 16px;font-size:14.5px;line-height:1.45;color:#2A3560}
+.snap:hover{transform:rotate(0) translateY(-6px)!important}
+.snap.family{grid-column:1/6;transform:rotate(-2.2deg);margin-top:40px}
+.snap.family img{aspect-ratio:3/4}
+.snap.dog{grid-column:6/9;transform:rotate(2.4deg)}
+.snap.dog img{aspect-ratio:9/14;object-position:50% 40%}
+.snap.kid{grid-column:9/13;transform:rotate(-1.4deg);margin-top:70px}
+.snap.kid img{aspect-ratio:9/14;object-position:50% 45%}
+.stamp{position:absolute;z-index:3;font-family:var(--f-display);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.04em;
+  padding:8px 12px;border:2px solid currentColor;border-radius:6px;background:rgba(239,230,210,.92)}
+.stamp.s-fun{top:-14px;right:-10px;color:var(--signal);transform:rotate(9deg)}
+.stamp.s-dog{top:22px;left:-14px;color:#C98A00;transform:rotate(-11deg)}
+.stamp.s-kid{top:-16px;left:14px;color:#1B6E5C;transform:rotate(-4deg)}
+.tape{position:absolute;top:-12px;left:50%;width:84px;height:24px;margin-left:-42px;background:rgba(242,182,48,.55);transform:rotate(-3deg)}
+@media(max-width:860px){
+  .crew{grid-template-columns:1fr 1fr;gap:28px 16px}
+  .snap.family{grid-column:1/-1;margin-top:0;transform:rotate(-1.4deg)}
+  .snap.dog{grid-column:1/2;transform:rotate(1.6deg)}
+  .snap.kid{grid-column:2/3;margin-top:36px;transform:rotate(-1.6deg)}
+  .snap figcaption{flex-direction:column;align-items:flex-start;gap:4px}
+  .snap figcaption span{text-align:left;white-space:normal}
+  .snap figcaption b{font-size:15px}
+  .snap p{font-size:13.5px}
+}
+
+/* ---------- миссии ---------- */
+.missions{display:grid;gap:22px}
+.mission{position:relative;background:var(--space-2);border:1px solid var(--hull);border-radius:22px;padding:30px;overflow:hidden}
+.mission>*{position:relative}
+.m-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;align-items:flex-start;margin-bottom:14px}
+.m-head h3{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,3vw,30px);color:var(--ivory);margin:6px 0 0;line-height:1.1}
+.status{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.status.live{color:var(--mint)}
+.status.soon{color:var(--mustard)}
+.status.lab{color:var(--signal)}
+.mission>p{max-width:62ch;margin:0 0 20px;color:var(--ink)}
+.m-link{font-family:var(--f-mono);font-size:13px;color:var(--mustard);text-decoration:none;border-bottom:1px solid rgba(242,182,48,.4)}
+.m-link:hover{border-color:var(--mustard)}
+
+.mission.grape{background:linear-gradient(160deg,#1A2A5E 0%,var(--space-2) 55%)}
+.mission.grape::before{content:"";position:absolute;width:420px;height:420px;right:-140px;top:-160px;border-radius:50%;
+  border:1px solid rgba(127,224,200,.18);box-shadow:inset 0 0 0 40px rgba(127,224,200,.03),0 0 0 60px rgba(127,224,200,.04)}
+.wordmark{font-size:clamp(40px,7vw,76px)!important;letter-spacing:-.04em;line-height:.95!important;
+  background:linear-gradient(180deg,var(--ivory) 0 55%,var(--mint) 55% 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+.facts{display:grid;grid-template-columns:1.2fr 1.2fr auto;gap:0;margin:6px 0 34px;border-block:1px solid var(--hull)}
+.facts>div{padding:16px 22px 16px 0;min-width:0}
+.facts>div+div{padding-left:22px;border-left:1px solid var(--hull)}
+.facts dt{margin-bottom:4px}
+.facts dd{margin:0;color:var(--ivory);font-weight:500}
+.sol-head{margin-bottom:-12px}
+.solutions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+@media(max-width:760px){.facts{grid-template-columns:1fr}.facts>div+div{padding-left:0;border-left:0;border-top:1px solid var(--hull)}}
+.sol{background:rgba(11,20,48,.6);border:1px solid var(--hull);border-radius:14px;padding:20px;min-width:0}
+.sol h4{font-family:var(--f-display);font-weight:600;font-size:16px;color:var(--ivory);margin:8px 0 8px;line-height:1.25}
+.sol p{margin:0;font-size:15px;color:var(--muted);line-height:1.5}
+.sol .metric{display:inline-block;margin-top:14px;font-family:var(--f-mono);font-size:12px;color:var(--mint);letter-spacing:.06em}
+.duo{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
+.duo>*{min-width:0}
+.mission.codes{background:radial-gradient(120% 90% at 100% 100%,#3B2257 0%,var(--space-2) 60%)}
+.crab-box{position:absolute;right:14px;bottom:14px;width:150px;height:84px;overflow:hidden;pointer-events:none}
+.crab-box img{display:block;width:150px;height:150px;max-width:none;margin-top:-38px;image-rendering:pixelated}
+.mission.codes>p{padding-right:0}
+.mission.codes{padding-bottom:112px!important}
+.repos{display:grid;gap:12px;margin-top:6px}
+.repo{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border:1px dashed var(--hull);border-radius:12px;text-decoration:none;transition:border-color .2s,background .2s}
+.repo:hover{border-color:var(--signal);background:rgba(255,107,53,.06)}
+.repo b{font-family:var(--f-mono);font-weight:600;font-size:15px;color:var(--ivory)}
+.repo small{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+.repo .arr{font-family:var(--f-display);color:var(--signal);font-size:18px}
+@media(max-width:860px){
+  .duo,.solutions{grid-template-columns:1fr}
+  .mission{padding:24px 20px}
+}
+
+/* ---------- свободный полёт ---------- */
+.free{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.cell{background:var(--space-2);border:1px solid var(--hull);border-radius:20px;padding:24px;min-width:0;position:relative;overflow:hidden}
+.cell h3{font-family:var(--f-display);font-weight:600;font-size:19px;color:var(--ivory);margin:10px 0 8px;line-height:1.25;text-wrap:balance}
+.cell p{margin:0;color:var(--muted);font-size:15.5px}
+.cell.book{grid-column:span 4;display:grid;grid-template-columns:1fr 210px;gap:24px;align-items:center;
+  background:radial-gradient(90% 120% at 100% 50%,#2A1F4E 0%,var(--space-2) 62%)}
+.cell.book h3{font-size:clamp(24px,3.2vw,34px);font-weight:800;margin-top:12px}
+.cell.book p{color:var(--ink);max-width:44ch}
+.cell.book canvas{width:210px;height:210px;max-width:100%;justify-self:center}
+.cell.kid-cell{grid-column:span 2;background:linear-gradient(180deg,var(--space-2),#16264F)}
+.cell.games{grid-column:span 3}
+.cell.ideas{grid-column:span 3}
+.quote{margin:20px 0 0;padding:16px 20px;border-left:3px solid var(--mustard);background:rgba(242,182,48,.07);border-radius:0 12px 12px 0}
+.quote p{margin:0;font-family:var(--f-display);font-weight:600;font-size:clamp(18px,2.2vw,22px);color:var(--ivory);line-height:1.3}
+.quote cite{display:block;margin-top:8px;font-style:normal;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--mustard)}
+.cell.book .saga-line{margin-top:16px;color:var(--muted);font-size:11px;line-height:1.6}
+.saga{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+.saga li{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:10px 14px;border:1px solid var(--hull);border-radius:10px;font-size:15px;color:var(--muted)}
+.saga li b{font-weight:500}
+.saga li span{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.saga li.done{color:var(--ink)}
+.saga li.done b{text-decoration:line-through;text-decoration-color:var(--mint)}
+.saga li.done span{color:var(--mint)}
+.saga li.now{border-color:var(--mustard);color:var(--ivory)}
+.saga li.now span{color:var(--mustard)}
+.reading{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--space);background:var(--mustard);padding:5px 10px;border-radius:999px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chips span{font-family:var(--f-mono);font-size:12px;padding:6px 11px;border:1px solid var(--hull);border-radius:8px;color:var(--ink)}
+.cell .big{position:absolute;right:16px;top:12px;font-family:var(--f-display);font-weight:900;font-size:64px;line-height:1;color:rgba(255,107,53,.12);pointer-events:none}
+@media(max-width:860px){
+  .free{grid-template-columns:1fr}
+  .cell.book,.cell.kid-cell,.cell.games,.cell.ideas{grid-column:auto}
+  .cell.book{grid-template-columns:1fr}
+  .cell.book canvas{width:170px;height:170px;grid-row:1}
+}
+.cases{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;margin-top:16px;padding:18px 20px;border-radius:14px;
+  background:var(--mint);color:var(--space);text-decoration:none;font-weight:500;transition:transform .2s}
+.cases b{font-family:var(--f-display);font-weight:800}
+.cases:hover{transform:translateY(-2px)}
+
+.family-cell{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between}
+.family-cell h3{margin-bottom:0}
+.family-cell p{max-width:56ch}
+.telemetry strong{overflow-wrap:anywhere}
+/* ---------- принципы ---------- */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hull)}
+.rule{padding:28px 28px 0 0;min-width:0}
+.rule+.rule{padding-left:28px;border-left:1px solid var(--hull)}
+.rule svg{width:44px;height:44px;margin-bottom:16px}
+.rule h3{font-family:var(--f-display);font-weight:600;font-size:19px;color:var(--ivory);margin:0 0 10px;line-height:1.25;text-wrap:balance}
+.rule p{margin:0;color:var(--muted);font-size:15.5px}
+@media(max-width:860px){
+  .rules{grid-template-columns:1fr}
+  .rule,.rule+.rule{padding:24px 0;border-left:0;border-bottom:1px solid var(--hull)}
+}
+
+/* ---------- связь ---------- */
+.contact{position:relative;background:var(--ivory);color:var(--space);border-radius:28px;padding:clamp(28px,5vw,56px);overflow:hidden}
+.contact::before{content:"";position:absolute;right:-90px;bottom:-90px;width:300px;height:300px;border-radius:50%;
+  background:repeating-radial-gradient(circle,transparent 0 18px,rgba(255,107,53,.18) 18px 20px)}
+.contact>*{position:relative}
+.contact h2{color:var(--space)}
+.contact h2 span{color:var(--signal)}
+.contact .lead{color:#2A3560;max-width:44ch;margin:18px 0 30px}
+.channels{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ch{background:#fff8ea;border:1.5px solid var(--space);border-radius:16px;padding:18px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.ch .mono{color:#5A6488}
+.ch .val{font-family:var(--f-mono);font-weight:600;font-size:15px;word-break:break-all;user-select:all}
+.ch a.val{text-decoration:none;border-bottom:1.5px solid var(--signal);align-self:flex-start}
+.copy{align-self:flex-start;margin-top:6px;font-family:var(--f-display);font-weight:600;font-size:12px;padding:8px 14px;border-radius:999px;border:0;background:var(--space);color:var(--ivory);cursor:pointer}
+.copy:hover{background:var(--signal);color:var(--space)}
+.todo{background:rgba(255,107,53,.14);border-radius:4px;padding:0 4px}
+@media(max-width:760px){.channels{grid-template-columns:1fr}}
+
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:40px 48px;border-top:1px solid var(--hull);margin-top:70px}
+
+@media (prefers-reduced-motion:reduce){
+  .sat{animation:none}
+  .snap,.btn{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="callsign" href="#top" aria-label="В начало"><b>РЛ</b><span class="mono">Бортжурнал</span></a>
+    <nav class="mono" aria-label="Разделы">
+      <a href="#crew">Экипаж</a><a href="#free">Хобби</a><a href="#missions">Дело</a><a href="#contact">Связь</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <div class="eyebrow mono"><span>Санкт-Петербург</span><span>Открыт для новых проектов</span></div>
+        <h1>Роман<em>Лучко</em></h1>
+        <p class="lead">Предприниматель. Основатель студии <b>Grape24</b> и автор семейного стартапа <b>«Три кода»</b>. Муж, папа, собачник и человек, который любит доводить идеи до дела.</p>
+        <div class="btns">
+          <a class="btn primary" href="#contact">Написать</a>
+          <a class="btn" href="#missions">Мои проекты</a>
+        </div>
+      </div>
+      <div class="porthole-box">
+        <div class="orbit o2"></div><div class="orbit"></div>
+        <div class="sat s2"><i></i></div><div class="sat"><i></i></div>
+        <div class="porthole"><img src="img/portrait.jpg" alt="Роман Лучко, портрет на фоне вечернего моря"></div>
+        <div class="tag">Командир<b>Роман</b></div>
+      </div>
+    </div>
+
+    <div class="telemetry">
+      <div><strong>1994</strong><small>родился в Омске ранним утром</small></div>
+      <div><strong>Петербург</strong><small>здесь живу, работаю и гуляю с собакой</small></div>
+      <div><strong>3&nbsp;+&nbsp;Нора</strong><small>я, жена, сын и наша собака</small></div>
+      <div><strong>∞</strong><small>столько у меня идей, самые живучие становятся проектами</small></div>
+    </div>
+
+    <section id="crew">
+      <div class="sec-head">
+        <h2>Экипаж<span>.</span></h2>
+        <span class="mono">Снимки из семейного архива</span>
+      </div>
+      <div class="crew">
+        <figure class="snap family">
+          <span class="stamp s-fun">Весёлый парень</span>
+          <img src="img/family.jpg" alt="Роман с женой в народных костюмах на деревянных качелях" loading="lazy">
+          <figcaption><b>Мой обычный будничный наряд</b><span>Снимок 01 · лето</span></figcaption>
+          <p>В нём и хожу на встречи. Рядом жена, с ней мы вместе запускаем «Три кода».</p>
+        </figure>
+        <figure class="snap dog">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="stamp s-dog">Собачник</span>
+          <img src="img/dog.jpg" alt="Рыжая собака Нора в жёлтой куртке играет в снегу" loading="lazy">
+          <figcaption><b>Нора</b><span>Снимок 02 · зима</span></figcaption>
+          <p>Наша собака. Гуляем в любую погоду, но снег она любит больше всего. Белка и Стрелка одобрили бы.</p>
+        </figure>
+        <figure class="snap kid">
+          <span class="stamp s-kid">Папа</span>
+          <img src="img/kid.jpg" alt="Ребёнок на беговеле едет по осенним листьям к памятнику-самолёту" loading="lazy">
+          <figcaption><b>Младший пилот</b><span>Снимок 03 · осень</span></figcaption>
+          <p>Сын держит курс на МиГ. Лицо оставим в секрете.</p>
+        </figure>
+      </div>
+    </section>
+
+    <section id="free">
+      <div class="sec-head">
+        <h2>Свободный полёт<span>.</span></h2>
+        <span class="mono">Когда ноутбук закрыт</span>
+      </div>
+      <div class="free">
+        <article class="cell book">
+          <div>
+            <span class="reading">● Больше 10 книг в год</span>
+            <h3>«Воспоминания о прошлом Земли»</h3>
+            <p>Каждый год читаю больше десяти книг. Последнее, что прочитал, — трилогия Лю Цысиня. Делаю стартап про звёзды и читаю про звёзды. Совпадение, но приятное.</p>
+            <blockquote class="quote"><p>«Вселенная — это тёмный лес».</p><cite>Ло Цзи, «Тёмный лес»</cite></blockquote>
+            <p class="saga-line mono">Задача трёх тел · Тёмный лес · Вечная жизнь Смерти</p>
+          </div>
+          <canvas id="threebody" width="420" height="420" aria-label="Три светила на одной орбите в форме восьмёрки"></canvas>
+        </article>
+        <article class="cell kid-cell">
+          <span class="mono">С сыном</span>
+          <h3>Изучаем Вселенную</h3>
+          <p>Планеты, ракеты, чёрные дыры. Объясняю ему космос и сам узнаю много нового.</p>
+        </article>
+        <article class="cell games">
+          <span class="big" aria-hidden="true">GG</span>
+          <span class="mono">Отдых</span>
+          <h3>Играю</h3>
+          <p>Наше поколение пашет как никогда, поэтому и отдыхать нужно по-настоящему. Люблю большие миры, в которых можно прожить целую историю.</p>
+          <div class="chips"><span>Diablo</span><span>World of Warcraft</span><span>Mass Effect</span><span>«Ведьмак»</span><span>Star Wars</span><span>Hearthstone</span><span>Civilization</span></div>
+        </article>
+        <article class="cell ideas">
+          <span class="big" aria-hidden="true">+1</span>
+          <span class="mono">Главное хобби</span>
+          <h3>Придумывать новое</h3>
+          <p>Идеи появляются быстрее, чем я успеваю их запускать. Лучшие становятся проектами, остальные ждут своего часа в заметках.</p>
+        </article>
+        <article class="cell family-cell">
+          <div><span class="mono">Всё остальное время</span><h3>Семья</h3></div>
+          <p>Выходные втроём, прогулки с Норой и разговоры с женой о новых планах. Это время я не отдаю никакой работе.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="missions">
+      <div class="sec-head">
+        <h2>Дело<span>.</span></h2>
+        <span class="mono">Компания, стартап и свои программы</span>
+      </div>
+      <div class="missions">
+
+        <article class="mission grape">
+          <div class="m-head">
+            <div><span class="mono">Моя компания · Санкт-Петербург</span><h3 class="wordmark">Grape24</h3></div>
+            <span class="status live">Работает</span>
+          </div>
+          <p>Я основал Grape24 и отвечаю за клиентов и продажи, а техническую часть ведёт Владимир Румянцев. Помогаем компаниям навести порядок в Битрикс24: внедряем, настраиваем, обучаем людей, подключаем телефонию, 1С и мессенджеры. Состав работ и цену фиксируем в договоре, поэтому клиент платит за результат, а не за часы.</p>
+          <dl class="facts">
+            <div><dt class="mono">Роль</dt><dd>Основатель, руководитель коммерческого департамента</dd></div>
+            <div><dt class="mono">Опыт</dt><dd>Внедрения в десятках компаний</dd></div>
+            <div><dt class="mono">Сайт</dt><dd><a class="m-link" href="https://grape24.ru" target="_blank" rel="noopener">grape24.ru ↗</a></dd></div>
+          </dl>
+          <div class="sol-head"><span class="mono">Наши ИИ-решения</span></div>
+          <div class="solutions">
+            <div class="sol">
+              <span class="mono">Закупки</span>
+              <h4>Счета поставщиков</h4>
+              <p>Менеджер загружает счёт в любом виде: PDF, Word или фото с телефона. ИИ сам находит позиции и переносит их в сделку, а данные уходят в 1С.</p>
+              <span class="metric">≈ 1,9 ₽ за один счёт</span>
+            </div>
+            <div class="sol">
+              <span class="mono">Сервис</span>
+              <h4>Посещения</h4>
+              <p>Приложение для записи клиентов на сеансы. ИИ заполняет отчёты, собирает данные из разных источников и ведёт карточку клиента.</p>
+              <span class="metric">Наш собственный продукт</span>
+            </div>
+            <div class="sol">
+              <span class="mono">Продажи</span>
+              <h4>Контроль отдела продаж</h4>
+              <p>ИИ проверяет, как менеджеры ведут сделки на ключевых этапах, и показывает руководителю, где теряются клиенты.</p>
+              <span class="metric">Оптовая стройбаза</span>
+            </div>
+            <div class="sol">
+              <span class="mono">Коммерческие предложения</span>
+              <h4>КП по звонку</h4>
+              <p>ИИ слушает разговор с клиентом, сверяется с почтой и CRM и готовит коммерческое предложение под нужный этап сделки.</p>
+              <span class="metric">Застройщик загородных домов</span>
+            </div>
+          </div>
+          <a class="cases" href="https://grape24.ru" target="_blank" rel="noopener"><span>Услуги, готовые отчёты и кейсы студии</span><b>grape24.ru ↗</b></a>
+        </article>
+
+        <div class="duo">
+          <article class="mission codes">
+            <div class="m-head">
+              <div><span class="mono">Семейный стартап</span><h3>Три кода. Дорога Шута</h3></div>
+              <span class="status live">Работает</span>
+            </div>
+            <p>Тоже про звёзды. Человек вводит дату рождения и отправляется в личное путешествие по 22 арканам вместе с пиксельным крабом. Внутри астрология, «Код энергии» и Матрица судьбы. Большую часть расчётов делает код, а с текстами помогают ИИ-агенты.</p>
+            <a class="m-link" href="https://trikoda.ru" target="_blank" rel="noopener">trikoda.ru ↗</a>
+            <div class="crab-box"><picture><source srcset="img/crab.png" media="(prefers-reduced-motion: reduce)"><img src="img/crab.gif" alt="Пиксельный краб — проводник «Трёх кодов» машет клешнёй" width="512" height="512"></picture></div>
+          </article>
+
+          <article class="mission lab">
+            <div class="m-head">
+              <div><span class="mono">GitHub</span><h3>Свои программы</h3></div>
+              <span class="status lab">Открытый код</span>
+            </div>
+            <p>Небольшие программы для Windows. Пишу их сам, исходники открыты.</p>
+            <div class="repos">
+              <a class="repo" href="https://github.com/Luchano55/DropWheel" target="_blank" rel="noopener"><span><b>DropWheel</b><small>Конвертер файлов, который живёт в трее и работает без интернета. Перетащил файл, нажал пробел, выбрал формат. Ещё делает скриншоты и записывает экран.</small></span><span class="arr">↗</span></a>
+              <a class="repo" href="https://github.com/Luchano55/gigarest" target="_blank" rel="noopener"><span><b>GigaRest</b><small>Переводит рабочий компьютер в режим отдыха: закрывает рабочие программы, выключает уведомления и включает спокойную заставку. Пока в разработке.</small></span><span class="arr">↗</span></a>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="rules">
+      <div class="sec-head">
+        <h2>Как я работаю<span>.</span></h2>
+        <span class="mono">Бортовой устав</span>
+      </div>
+      <div class="rules">
+        <div class="rule">
+          <svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="20" stroke="#FF6B35" stroke-width="2"/><path d="M13 23l6 6 12-14" stroke="#EFE6D2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Довожу до результата</h3>
+          <p>Дело сделано, когда им пользуются люди. До этого момента это просто хорошая идея.</p>
+        </div>
+        <div class="rule">
+          <svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="20" stroke="#F2B630" stroke-width="2"/><text x="22" y="28" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="600" fill="#EFE6D2">₽</text></svg>
+          <h3>Считаю деньги клиента</h3>
+          <p>Прежде чем что-то предложить, прикидываю, сколько это будет стоить и когда окупится. Это касается и ИИ: распознавание одного счёта стоит у нас меньше двух рублей.</p>
+        </div>
+        <div class="rule">
+          <svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="20" stroke="#7FE0C8" stroke-width="2"/><circle cx="14" cy="28" r="2.6" fill="#EFE6D2"/><circle cx="21" cy="22" r="2.6" fill="#EFE6D2"/><circle cx="28" cy="18" r="2.6" fill="#EFE6D2"/><path d="M29.5 12.5l5 1-2.5 4.5" stroke="#7FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Каждый проект оставляет след</h3>
+          <p>Удачные находки одного проекта не пропадают, а помогают следующему. Поэтому новые клиенты быстрее получают проверенные решения.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact">
+        <span class="mono" style="color:#5A6488">Канал связи открыт</span>
+        <h2 style="margin-top:12px">Выйти на&nbsp;связь<span>.</span></h2>
+        <p class="lead">Пишите, если нужна помощь с Битрикс24, хочется отдать рутину ИИ или обсудить общий проект. Отвечаю сам.</p>
+        <div class="channels">
+          <div class="ch">
+            <span class="mono">Почта</span>
+            <span class="val" id="mail">luchko.ro@gmail.com</span>
+            <button class="copy" type="button" id="copy-mail" data-copy="luchko.ro@gmail.com">Скопировать</button>
+          </div>
+          <div class="ch">
+            <span class="mono">Telegram</span>
+            <a class="val" href="https://t.me/luchano55" target="_blank" rel="noopener">@luchano55</a>
+          </div>
+          <div class="ch">
+            <span class="mono">GitHub</span>
+            <a class="val" href="https://github.com/Luchano55" target="_blank" rel="noopener">github.com/Luchano55</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mono">
+    <span>Роман Лучко · Санкт-Петербург</span>
+    <span>Бортжурнал ведётся с 1994 года</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  /* звёздное небо */
+  var c=document.getElementById('stars'),x=c.getContext('2d'),stars=[],w,h,dpr=Math.min(window.devicePixelRatio||1,2);
+  var still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){w=c.width=innerWidth*dpr;h=c.height=innerHeight*dpr;
+    stars=[];var n=Math.round(innerWidth*innerHeight/5200);
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.2+.3)*dpr,p:Math.random()*6.3,s:.4+Math.random()*1.2,warm:Math.random()<.08});}
+  function draw(t){x.clearRect(0,0,w,h);
+    for(var i=0;i<stars.length;i++){var s=stars[i],a=still?.7:.35+.45*(.5+.5*Math.sin(s.p+t*.001*s.s));
+      x.fillStyle=s.warm?'rgba(242,182,48,'+a+')':'rgba(220,227,245,'+a+')';x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);x.fill();}
+    if(!still)requestAnimationFrame(draw);}
+  size();addEventListener('resize',size);requestAnimationFrame(draw);
+
+  /* болты иллюминатора */
+  var box=document.querySelector('.porthole-box'),b=document.createElement('div');b.className='bolts';b.setAttribute('aria-hidden','true');
+  for(var i=0;i<16;i++){var e=document.createElement('i');e.style.setProperty('--a',(i*22.5)+'deg');b.appendChild(e);}box.appendChild(b);
+
+  /* три тела: орбита-восьмёрка */
+  var tb=document.getElementById('threebody');if(tb){var q=tb.getContext('2d'),W=tb.width,H=tb.height,cols=['#F2B630','#FF6B35','#7FE0C8'],t0=0;
+    function pos(p){var s=Math.sin(p),c=Math.cos(p);return[W/2+W*.38*s,H/2+H*.2*s*c];}
+    function frame(ts){q.clearRect(0,0,W,H);
+      q.strokeStyle='rgba(142,155,196,.28)';q.lineWidth=2;q.setLineDash([6,8]);q.beginPath();
+      for(var k=0;k<=200;k++){var pp=pos(k/200*6.2832);k?q.lineTo(pp[0],pp[1]):q.moveTo(pp[0],pp[1]);}q.stroke();q.setLineDash([]);
+      var ph=still?0.6:ts*0.00045;
+      for(var j=0;j<3;j++){var p=pos(ph+j*2.0944);var gr=q.createRadialGradient(p[0],p[1],0,p[0],p[1],34);gr.addColorStop(0,cols[j]);gr.addColorStop(1,'rgba(0,0,0,0)');
+        q.fillStyle=gr;q.beginPath();q.arc(p[0],p[1],34,0,6.2832);q.fill();q.fillStyle=cols[j];q.beginPath();q.arc(p[0],p[1],11,0,6.2832);q.fill();}
+      if(!still)requestAnimationFrame(frame);}
+    requestAnimationFrame(frame);}
+
+  /* копирование почты */
+  var btn=document.getElementById('copy-mail');
+  btn.addEventListener('click',function(){var v=btn.getAttribute('data-copy');
+    function done(){btn.textContent='Скопировано';setTimeout(function(){btn.textContent='Скопировать';},1800);}
+    function fallback(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Выделено, нажмите копировать';}
+    try{navigator.clipboard.writeText(v).then(done,fallback);}catch(e){fallback();}
+  });
+})();
+</script>
+
+</body>
+</html>
