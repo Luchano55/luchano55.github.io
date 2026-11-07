@@ -276,6 +276,20 @@ main{overflow-x:clip}
   .log li>p,.log li>div{grid-column:2}
 }
 
+/* ---------- цифры ---------- */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border-block:1px solid var(--hull);margin-bottom:28px}
+.stats div{padding:22px 18px;border-left:1px solid var(--hull);min-width:0}
+.stats div:first-child{border-left:0;padding-left:0}
+.stats strong{display:block;font-family:var(--f-display);font-weight:800;font-size:clamp(22px,2.6vw,34px);color:var(--mustard);line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats small{display:block;font-size:14px;color:var(--muted);margin-top:6px;line-height:1.4}
+@media(max-width:860px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stats div{border-left:0;padding-left:0;border-top:1px solid var(--hull)}
+  .stats div:nth-child(-n+2){border-top:0}
+  .stats div:nth-child(even){padding-left:18px;border-left:1px solid var(--hull)}
+  .stats div:last-child{grid-column:1/-1}
+}
+
 /* ---------- принципы ---------- */
 .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hull)}
 .rule{padding:28px 28px 0 0;min-width:0}
@@ -441,6 +455,13 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;paddin
       <div class="sec-head">
         <h2>Дело<span>.</span></h2>
         <span class="mono">Компания, стартап и свои программы</span>
+      </div>
+      <div class="stats">
+        <div><strong>100+</strong><small>проектов автоматизации</small></div>
+        <div><strong>с 2015</strong><small>в B2B-продажах</small></div>
+        <div><strong>×2,3</strong><small>рост среднего дохода с клиента</small></div>
+        <div><strong>1,9&nbsp;₽</strong><small>стоимость распознавания одного счёта ИИ</small></div>
+        <div><strong>до 15</strong><small>человек в команде</small></div>
       </div>
       <div class="missions">
 
