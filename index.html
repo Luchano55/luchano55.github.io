@@ -252,6 +252,30 @@ h2 span{color:var(--signal)}
 .family-cell h3{margin-bottom:0}
 .family-cell p{max-width:56ch}
 .telemetry strong{overflow-wrap:normal;word-break:keep-all}
+main{overflow-x:clip}
+/* ---------- бортжурнал ---------- */
+.log{list-style:none;margin:0;padding:0;position:relative;max-width:860px}
+.log::before{content:"";position:absolute;left:calc(84px + 9px);top:10px;bottom:10px;border-left:2px dashed var(--hull)}
+.log li{display:grid;grid-template-columns:84px 20px 1fr;gap:0 22px;align-items:start;padding-block:0 30px;position:relative}
+.log li:last-child{padding-bottom:0}
+.log li>*{min-width:0}
+.log-year{font-family:var(--f-display);font-weight:800;font-size:26px;color:var(--ivory);line-height:1.1;text-align:right;font-variant-numeric:tabular-nums}
+.log-dot{width:20px;height:20px;border-radius:50%;background:var(--space);border:2px solid var(--muted);margin-top:4px;position:relative;z-index:1}
+.log li p{margin:0;font-size:16.5px;line-height:1.55;color:var(--ink);max-width:60ch}
+.log li a{color:var(--mustard);text-decoration:none;border-bottom:1px solid rgba(242,182,48,.4)}
+.log-stamp{display:inline-block;margin-top:12px;font-family:var(--f-display);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.04em;line-height:1.35;color:var(--signal);border:2px solid currentColor;border-radius:6px;padding:7px 11px;transform:rotate(-2deg);background:rgba(255,107,53,.06)}
+.log li.now .log-dot{border-color:var(--mint);background:var(--mint);box-shadow:0 0 0 6px rgba(127,224,200,.15),0 0 18px var(--mint);animation:pulse 2.4s ease-in-out infinite}
+.log li.now .log-year{color:var(--mint)}
+.log-live{display:inline-block;margin-top:10px;color:var(--mint)}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(127,224,200,0),0 0 24px var(--mint)}}
+@media(max-width:620px){
+  .log::before{left:9px}
+  .log li{grid-template-columns:20px 1fr;gap:4px 16px}
+  .log-dot{grid-row:1/3;grid-column:1}
+  .log-year{grid-column:2;text-align:left;font-size:22px}
+  .log li>p,.log li>div{grid-column:2}
+}
+
 /* ---------- принципы ---------- */
 .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hull)}
 .rule{padding:28px 28px 0 0;min-width:0}
@@ -300,7 +324,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;paddin
   <header class="top">
     <a class="callsign" href="#top" aria-label="В начало"><b>РЛ</b><span class="mono">Бортжурнал</span></a>
     <nav class="mono" aria-label="Разделы">
-      <a href="#crew">Экипаж</a><a href="#free">Хобби</a><a href="#missions">Дело</a><a href="#contact">Связь</a>
+      <a href="#crew">Экипаж</a><a href="#free">Хобби</a><a href="#log">Курс</a><a href="#missions">Дело</a><a href="#contact">Связь</a>
     </nav>
   </header>
 
@@ -399,6 +423,20 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;paddin
       </div>
     </section>
 
+    <section id="log">
+      <div class="sec-head">
+        <h2>Бортжурнал<span>.</span></h2>
+        <span class="mono">Курс с 2015 года</span>
+      </div>
+      <ol class="log">
+        <li><span class="log-year">2015</span><span class="log-dot" aria-hidden="true"></span><p>Возглавил отдел продаж 1С. Компания вышла на 2-е место в Петербурге по числу клиентов, открыли направление Битрикс24.</p></li>
+        <li><span class="log-year">2017</span><span class="log-dot" aria-hidden="true"></span><div><p>Собрал с нуля департамент развития интегратора 1С и Битрикс24, команда 20+ человек. Топ-5 по России по новым договорам 1С:ИТС, топ-20 партнёров Битрикс24.</p></div></li>
+        <li><span class="log-year">2018</span><span class="log-dot" aria-hidden="true"></span><p>Консалтинг по продажам: аудиты коммерческих отделов, точки роста, оценка и подбор продавцов для заказчиков.</p></li>
+        <li><span class="log-year">2020</span><span class="log-dot" aria-hidden="true"></span><p>Основал студию <a href="#grape">Grape24</a>. Команда до 15 человек, 100+ проектов автоматизации по России.</p></li>
+        <li class="now"><span class="log-year">2025</span><span class="log-dot" aria-hidden="true"></span><div><p>Запустил направление ИИ: агенты и приложения для Битрикс24, разработка командами ИИ-агентов.</p><span class="log-live mono">● В полёте</span></div></li>
+      </ol>
+    </section>
+
     <section id="missions">
       <div class="sec-head">
         <h2>Дело<span>.</span></h2>
@@ -406,7 +444,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;paddin
       </div>
       <div class="missions">
 
-        <article class="mission grape">
+        <article class="mission grape" id="grape">
           <div class="m-head">
             <div><span class="mono">Моя компания · Санкт-Петербург</span><h3 class="wordmark">Grape24</h3></div>
             <span class="status live">Работает</span>
