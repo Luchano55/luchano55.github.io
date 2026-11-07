@@ -300,6 +300,16 @@ main{overflow-x:clip}
 .case .res dd{color:var(--ivory);font-weight:500}
 @media(max-width:980px){.cases-grid{grid-template-columns:1fr!important}}
 
+/* ---------- как я управляю ---------- */
+.manifesto{list-style:none;margin:0;padding:0;border-top:1px solid var(--hull)}
+.manifesto li{position:relative;padding:22px 0 22px 44px;border-bottom:1px solid var(--hull);font-family:var(--f-display);font-weight:600;font-size:clamp(20px,2.8vw,32px);line-height:1.25;color:var(--ivory);letter-spacing:-.01em;text-wrap:balance}
+.manifesto li::before{content:"✦";position:absolute;left:4px;top:24px;font-size:.75em;color:var(--signal)}
+.manifesto li:nth-child(2)::before{color:var(--mustard)}
+.manifesto li:nth-child(3)::before{color:var(--mint)}
+.manifesto li:last-child{color:var(--mustard)}
+@media(max-width:620px){.manifesto li{padding-left:32px}.manifesto li::before{left:0}}
+@media (prefers-reduced-motion:reduce){.log li.now .log-dot{animation:none}}
+
 /* ---------- принципы ---------- */
 .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hull)}
 .rule{padding:28px 28px 0 0;min-width:0}
@@ -568,6 +578,19 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;paddin
           <p>Удачные находки одного проекта не пропадают, а помогают следующему. Поэтому новые клиенты быстрее получают проверенные решения.</p>
         </div>
       </div>
+    </section>
+
+    <section id="manage">
+      <div class="sec-head">
+        <h2>Как я управляю<span>.</span></h2>
+        <span class="mono">Надписи на борту</span>
+      </div>
+      <ul class="manifesto">
+        <li>Люди — самый ценный источник информации, а цифры подтверждают, что путь выбран верно.</li>
+        <li>Каждая встреча — по делу, оплата — только за результат.</li>
+        <li>Думай масштабно, действуй локально.</li>
+        <li>Можно опустить руки в трудный момент, но нельзя перестать мечтать.</li>
+      </ul>
     </section>
 
     <section id="contact">
