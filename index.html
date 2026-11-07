@@ -290,6 +290,16 @@ main{overflow-x:clip}
   .stats div:last-child{grid-column:1/-1}
 }
 
+/* ---------- кейсы ---------- */
+.cases-grid{grid-template-columns:repeat(3,1fr)!important}
+.case dl{margin:12px 0 0;display:grid;gap:12px}
+.case dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.case dd{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink)}
+.case .res{padding-top:12px;border-top:1px dashed var(--hull)}
+.case .res dt{color:var(--mint)}
+.case .res dd{color:var(--ivory);font-weight:500}
+@media(max-width:980px){.cases-grid{grid-template-columns:1fr!important}}
+
 /* ---------- принципы ---------- */
 .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hull)}
 .rule{padding:28px 28px 0 0;min-width:0}
@@ -476,31 +486,34 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;paddin
             <div><dt class="mono">Опыт</dt><dd>Внедрения в десятках компаний</dd></div>
             <div><dt class="mono">Сайт</dt><dd><a class="m-link" href="https://grape24.ru" target="_blank" rel="noopener">grape24.ru ↗</a></dd></div>
           </dl>
-          <div class="sol-head"><span class="mono">Наши ИИ-решения</span></div>
-          <div class="solutions">
-            <div class="sol">
+          <div class="sol-head"><span class="mono">Кейсы · ИИ в Битрикс24</span></div>
+          <div class="solutions cases-grid">
+            <div class="sol case">
               <span class="mono">Закупки</span>
               <h4>Счета поставщиков</h4>
-              <p>Менеджер загружает счёт в любом виде: PDF, Word или фото с телефона. ИИ сам находит позиции и переносит их в сделку, а данные уходят в 1С.</p>
-              <span class="metric">≈ 1,9 ₽ за один счёт</span>
+              <dl>
+                <div><dt>Боль</dt><dd>Менеджеры вручную переносят позиции из счетов поставщиков в любом формате: PDF, Excel, фото с телефона.</dd></div>
+                <div><dt>Решение</dt><dd>Приложение для Битрикс24: ИИ распознаёт счёт и сам переносит позиции в сделку, есть связка с 1С.</dd></div>
+                <div class="res"><dt>Результат</dt><dd>Около 1,9&nbsp;₽ за документ вместо минут ручной работы.</dd></div>
+              </dl>
             </div>
-            <div class="sol">
-              <span class="mono">Сервис</span>
+            <div class="sol case">
+              <span class="mono">Сеть салонов</span>
               <h4>Посещения</h4>
-              <p>Приложение для записи клиентов на сеансы. ИИ заполняет отчёты, собирает данные из разных источников и ведёт карточку клиента.</p>
-              <span class="metric">Наш собственный продукт</span>
+              <dl>
+                <div><dt>Боль</dt><dd>У сети салонов по всей стране разные часовые пояса и нет единой картины по посещениям.</dd></div>
+                <div><dt>Решение</dt><dd>Бронирование времени с привязкой к услугам и товарам, аналитика посещений на данных Битрикс24 с разбивкой по салонам.</dd></div>
+                <div class="res"><dt>Результат</dt><dd>Управление территориями по цифрам, ИИ сам заполняет отчёты и составляет карту клиента.</dd></div>
+              </dl>
             </div>
-            <div class="sol">
+            <div class="sol case">
               <span class="mono">Продажи</span>
-              <h4>Контроль отдела продаж</h4>
-              <p>ИИ проверяет, как менеджеры ведут сделки на ключевых этапах, и показывает руководителю, где теряются клиенты.</p>
-              <span class="metric">Оптовая стройбаза</span>
-            </div>
-            <div class="sol">
-              <span class="mono">Коммерческие предложения</span>
-              <h4>КП по звонку</h4>
-              <p>ИИ слушает разговор с клиентом, сверяется с почтой и CRM и готовит коммерческое предложение под нужный этап сделки.</p>
-              <span class="metric">Застройщик загородных домов</span>
+              <h4>ИИ-контроль отдела продаж</h4>
+              <dl>
+                <div><dt>Боль</dt><dd>Руководитель тонет в ручном контроле, база заполнена формально.</dd></div>
+                <div><dt>Решение</dt><dd>План продаж, недельный экран «с кем связаться» и дашборд руководителя отдела продаж внутри Битрикс24.</dd></div>
+                <div class="res"><dt>Результат</dt><dd>Руководитель видит, кому и когда звонить, а не только сколько сделок.</dd></div>
+              </dl>
             </div>
           </div>
           <a class="cases" href="https://grape24.ru" target="_blank" rel="noopener"><span>Услуги, готовые отчёты и кейсы студии</span><b>grape24.ru ↗</b></a>
